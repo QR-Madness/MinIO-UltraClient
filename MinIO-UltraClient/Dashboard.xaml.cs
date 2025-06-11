@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace MinIO_UltraClient
 {
     /// <summary>
-    /// Interaction logic for IAM_Login.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class IAM_Login : UserControl
+    public partial class Dashboard : Page
     {
-        private MainWindow _mainWindow;
-
-        public IAM_Login(MainWindow mainWindow)
+        public Dashboard()
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
         }
     }
 }

@@ -8,9 +8,14 @@
         Title="MainWindow" Height="450" Width="800"
 		xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
-	<ui:SimpleStackPanel Margin="12" Spacing="24">
+	<ui:SimpleStackPanel Margin="12" Spacing="12">
 		<TextBlock Text="MinIO UltraClient" Style="{StaticResource HeaderTextBlockStyle}" />
-		<Button Content="Connect" Style="{StaticResource AccentButtonStyle}" />
-		<Button Content="Manage my connections" />
+		<Label Content="Endpoint - Access Key (UID)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+		<PasswordBox x:Name="AccessKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
+		<Label Content="Endpoint - Secret Key (Password)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+		<PasswordBox x:Name="SecretKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
+		<Label Content="Endpoint - URI" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+		<TextBox x:Name="EndpointUriInput" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Width="300"/>
+		<Button x:Name="ConnectUsingAccessKeyButton" Content="Connect" Style="{StaticResource AccentButtonStyle}" Click="ConnectUsingAccessKeyButton_Click" />
 	</ui:SimpleStackPanel>
 </Window>
