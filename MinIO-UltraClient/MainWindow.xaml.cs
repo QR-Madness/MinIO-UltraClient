@@ -20,5 +20,15 @@ namespace MinIO_UltraClient
         {
             InitializeComponent();
         }
+
+        public void Show_IAM_Login()
+        {
+            // Create an instance of the IAM_Login UserControl
+            IAM_Login iamLogin = new IAM_Login(this);
+            // Set the Content of the MainWindow to the IAM_Login UserControl
+            this.Content = iamLogin;
+            // Optionally, you can set the title or other properties of the MainWindow
+            this.Title = "IAM Login";
+        }
     }
 }
