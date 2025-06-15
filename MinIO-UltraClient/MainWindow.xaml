@@ -5,17 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinIO_UltraClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MIO UltraClient" Height="450" Width="800"
 		xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True">
 	<ui:SimpleStackPanel Margin="12" Spacing="12">
 		<TextBlock Text="MinIO UltraClient" Style="{StaticResource HeaderTextBlockStyle}" />
-		<Label Content="Endpoint - Access Key (UID)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
-		<PasswordBox x:Name="AccessKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
-		<Label Content="Endpoint - Secret Key (Password)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
-		<PasswordBox x:Name="SecretKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
-		<Label Content="Endpoint - URI" FontSize="14" HorizontalAlignment="Left" Height="19"/>
-		<TextBox x:Name="EndpointUriInput" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Width="300"/>
-		<Button x:Name="ConnectUsingAccessKeyButton" Content="Connect" Style="{StaticResource AccentButtonStyle}" Click="ConnectUsingAccessKeyButton_Click" />
+	<ui:SimpleStackPanel Margin="12" Spacing="12" Orientation="Horizontal">
+		<ui:SimpleStackPanel>
+			<Label Content="Endpoint - Access Key (UID)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+			<PasswordBox x:Name="AccessKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
+			<Label Content="Endpoint - Secret Key (Password)" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+			<PasswordBox x:Name="SecretKeyInput" Height="32" Width="250" HorizontalAlignment="Left"/>
+			<Label Content="Endpoint - URI" FontSize="14" HorizontalAlignment="Left" Height="19"/>
+			<TextBox x:Name="EndpointUriInput" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" Width="300"/>
+		</ui:SimpleStackPanel>
+		<ui:SimpleStackPanel Spacing="12">
+			<Label Content="FTP Port" Height="19" VerticalAlignment="Top" Width="300"/>
+			<TextBox x:Name="FtpPortInput" Height="32" TextWrapping="Wrap" Width="300"/>
+			<Button x:Name="ConnectUsingAccessKeyButton" Content="Connect" Style="{StaticResource AccentButtonStyle}" Click="ConnectUsingAccessKeyButton_Click" />
+		</ui:SimpleStackPanel>
+	</ui:SimpleStackPanel>
 	</ui:SimpleStackPanel>
 </Window>

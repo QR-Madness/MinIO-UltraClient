@@ -31,13 +31,27 @@ namespace MinIO_UltraClient
         private void LoadSavedEndpointAccess()
         {
             // Load saved access key, secret key, and URI from secure storage
-            (String accessKey, String secretKey, String uri) = SecureStorage.GetDefaultEndpointAccess();
+            IUltraClientConfig? ultraClientConfig = UltraClientConfigurationManager.LoadUltraClientConfig();
+
+            if (ultraClientConfig == null)
+            {
+                // If no saved configuration, return early
+                return;
+            }
+
+            // Correctly deconstruct the configuration object
+            string accessKey = ultraClientConfig.AccessKey;
+            string secretKey = ultraClientConfig.SecretKey;
+            string uri = ultraClientConfig.Uri;
+            int ftpPort = ultraClientConfig.FtpPort;
+
             // If available, populate the UI fields with these values
             if (!string.IsNullOrEmpty(accessKey) && !string.IsNullOrEmpty(secretKey) && !string.IsNullOrEmpty(uri))
             {
                 AccessKeyInput.Password = accessKey;
                 SecretKeyInput.Password = secretKey;
                 EndpointUriInput.Text = uri;
+                FtpPortInput.Text = ftpPort.ToString();
             }
         }
 
@@ -56,10 +70,15 @@ namespace MinIO_UltraClient
                 return;
             }
 
-            SecureStorage.SaveDefaultEndpointAccess(
-                AccessKeyInput.Password,
-                SecretKeyInput.Password,
-                EndpointUriInput.Text
+            UltraClientConfigurationManager.SaveUltraClientConfig(
+                new UltraClientConfig
+                {
+                    ProfileName = "default",
+                    AccessKey = AccessKeyInput.Password,
+                    SecretKey = SecretKeyInput.Password,
+                    Uri = EndpointUriInput.Text,
+                    FtpPort = int.Parse(FtpPortInput.Text),
+                }
             );
 
             // @TODO Launch dashboard

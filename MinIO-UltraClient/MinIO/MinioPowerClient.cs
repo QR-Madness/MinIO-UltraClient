@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentFTP;
 
 namespace MinIO_UltraClient.MinIO
 {
     public class MinioPowerClient
     {
         public IMinioClient client { get; private set; } = null!;
+        public FtpClient ftpClient { get; private set; } = null;
         // Cached credentials for the MinIO server
         public string endpointUri { get; private set; }
         private string endpointAccessKey;
@@ -43,6 +45,25 @@ namespace MinIO_UltraClient.MinIO
                 .WithEndpoint(endpointUri)
                 .WithCredentials(endpointAccessKey, endpointSecretKey)
                 .Build();
+        }
+
+        private void connectWithFtp()
+        {
+            this.ftpClient = new FtpClient(endpointUri, endpointAccessKey, endpointSecretKey);
+        }
+
+        private void disconnect()
+        {
+            if (client != null)
+            {
+                client.Dispose();
+                client = null!;
+            }
+            if (ftpClient != null)
+            {
+                ftpClient.Dispose();
+                ftpClient = null;
+            }
         }
     }
 }

@@ -10,11 +10,22 @@
       Title="Dashboard">
 
 	<Grid Background="#FF222222">
-		<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}">
-			<DataGrid.DataContext>
-				<DataModel:Bucket/>
-			</DataGrid.DataContext>
-		</DataGrid>
+		<TabControl>
+			<TabItem Header="TabItem">
+				<StackPanel>
+					<!--<Grid Background="#FFE5E5E5"/>-->
+					<TextBlock Foreground="Wheat" Style="{StaticResource HeaderTextBlockStyle}" Text="Buckets"/>
+					<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="WhiteSmoke">
+						<DataGrid.DataContext>
+							<DataModel:Bucket/>
+						</DataGrid.DataContext>
+					</DataGrid>
+				</StackPanel>
+			</TabItem>
+			<TabItem Header="TabItem">
+				<Grid Background="#FFE5E5E5"/>
+			</TabItem>
+		</TabControl>
 
 	</Grid>
 </Page>
