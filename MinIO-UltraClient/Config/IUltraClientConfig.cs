@@ -7,6 +7,7 @@ namespace MinIO_UltraClient.Config
         string SecretKey { get; set; }
         string Uri { get; set; }
         int FtpPort { get; set; }
+        int ServerPort { get; set; }
     }
 
     // Optionally, a concrete implementation for convenience
@@ -17,5 +18,6 @@ namespace MinIO_UltraClient.Config
         public string SecretKey { get; set; } = string.Empty;
         public string Uri { get; set; } = string.Empty;
         public int FtpPort { get; set; }
+        public int ServerPort { get; set; }
     }
 }

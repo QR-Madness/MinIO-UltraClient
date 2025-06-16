@@ -10,11 +10,21 @@
       Title="Dashboard">
 
 	<Grid Background="#FF222222">
-		<TabControl>
-			<TabItem Header="TabItem">
+		<TabControl Foreground="AntiqueWhite">
+			<TabControl.Background>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Pad">
+					<GradientStop Color="Black"/>
+					<GradientStop Color="White" Offset="0.61"/>
+				</LinearGradientBrush>
+			</TabControl.Background>
+			<TabItem Header="Buckets">
 				<StackPanel>
-					<!--<Grid Background="#FFE5E5E5"/>-->
 					<TextBlock Foreground="Wheat" Style="{StaticResource HeaderTextBlockStyle}" Text="Buckets"/>
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="RefreshBucketListButton" Content="Refresh" Margin="5,5,5,5" Background="CadetBlue" Foreground="AliceBlue" Click="RefreshBucketListButton_Click"/>
+						<Button x:Name="CreateBucketButton" Content="Create Bucket"  Margin="5,5,5,5" Background="Orchid" Foreground="AliceBlue"/>
+						<Button x:Name="DeleteBucketButton" Content="Delete Bucket" Margin="5,5,5,5" Background="OrangeRed" Foreground="AliceBlue"/>
+					</StackPanel>
 					<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="WhiteSmoke">
 						<DataGrid.DataContext>
 							<DataModel:Bucket/>

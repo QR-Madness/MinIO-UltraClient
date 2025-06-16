@@ -21,12 +21,14 @@ namespace MinIO_UltraClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        Dashboard? dashboard = null;
         public MainWindow()
         {
             InitializeComponent();
             // Load saved endpoint access if available
             LoadSavedEndpointAccess();
         }
+
 
         private void LoadSavedEndpointAccess()
         {
@@ -48,10 +50,13 @@ namespace MinIO_UltraClient
             // If available, populate the UI fields with these values
             if (!string.IsNullOrEmpty(accessKey) && !string.IsNullOrEmpty(secretKey) && !string.IsNullOrEmpty(uri))
             {
+                // Set the input fields with the saved values
                 AccessKeyInput.Password = accessKey;
                 SecretKeyInput.Password = secretKey;
                 EndpointUriInput.Text = uri;
+                // Set the FTP port and server port, using default values if not specified
                 FtpPortInput.Text = ftpPort.ToString();
+                ServerPortInput.Text = ultraClientConfig.ServerPort.ToString();
             }
         }
 
@@ -69,19 +74,22 @@ namespace MinIO_UltraClient
                 MessageBox.Show($"Connection failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            // If connection is successful, save the configuration
+            IUltraClientConfig ucConfig = new UltraClientConfig
+            {
+                ProfileName = "default",
+                AccessKey = AccessKeyInput.Password,
+                SecretKey = SecretKeyInput.Password,
+                Uri = EndpointUriInput.Text,
+                FtpPort = int.Parse(FtpPortInput.Text),
+                ServerPort = int.Parse(ServerPortInput.Text)
+            };
 
-            UltraClientConfigurationManager.SaveUltraClientConfig(
-                new UltraClientConfig
-                {
-                    ProfileName = "default",
-                    AccessKey = AccessKeyInput.Password,
-                    SecretKey = SecretKeyInput.Password,
-                    Uri = EndpointUriInput.Text,
-                    FtpPort = int.Parse(FtpPortInput.Text),
-                }
-            );
+            // Save the configuration to secure storage
+            UltraClientConfigurationManager.SaveUltraClientConfig(ucConfig);
 
-            // @TODO Launch dashboard
+            // Launch the admin dashboard
+            this.dashboard = new Dashboard(ucConfig);
         }
     }
 }
